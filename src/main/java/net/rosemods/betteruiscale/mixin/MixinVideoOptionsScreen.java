@@ -1,6 +1,5 @@
 package net.rosemods.betteruiscale.mixin;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.option.GameOptionsScreen;
 import net.minecraft.client.gui.screen.option.VideoOptionsScreen;
@@ -11,7 +10,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(VideoOptionsScreen.class)
@@ -23,10 +21,15 @@ public class MixinVideoOptionsScreen extends GameOptionsScreen {
         super(parent, gameOptions, title);
     }
 
-    @Redirect(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;onResolutionChanged()V"))
-    private void preventGuiScaleUpdateClick(MinecraftClient instance) {
+    @Override
+    protected void addOptions() {
         // do nothing
     }
+
+    //    @Redirect(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;onResolutionChanged()V"))
+    //    private void preventGuiScaleUpdateClick(MinecraftClient instance) {
+    //        // do nothing
+    //    }
 
     @Inject(method = "mouseClicked", at = @At("HEAD"))
     private void captureGuiScale(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
