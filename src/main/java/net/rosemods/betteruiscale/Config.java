@@ -5,6 +5,8 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderProgram;
+import net.minecraft.client.gl.ShaderProgramDefinition;
+import net.minecraft.client.gl.ShaderProgramKeys;
 import net.minecraft.client.option.SimpleOption;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.text.Text;
@@ -34,7 +36,7 @@ public class Config {
         });
 
     public void setFontSmoothingUniform() {
-        ShaderProgram textShader = GameRenderer.getRenderTypeTextProgram();
+        ShaderProgram textShader = MinecraftClient.getInstance().getShaderLoader().getOrCreateProgram(ShaderProgramKeys.RENDERTYPE_TEXT);
         if (textShader != null) {
             float value = fontSmoothing().getValue().floatValue() / FONT_SMOOTHING_SCALE;
             textShader.getUniformOrDefault("betteruiscale_smoothness").set(value);
