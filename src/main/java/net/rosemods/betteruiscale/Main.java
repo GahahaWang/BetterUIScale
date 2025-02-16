@@ -14,33 +14,12 @@ import java.nio.file.Path;
 public class Main implements ClientModInitializer {
     public static final String MODID = "advanced-ui-scale";
     public static final boolean IS_DEV = FabricLoader.getInstance().isDevelopmentEnvironment();
-    public static final NamedLogger LOGGER = new NamedLogger(LogManager.getLogger(MODID), !IS_DEV);
-
-    private static Config config;
-
-    public static Config config() {
-        return config;
-    }
-
+    
+    /**
+     * Runs the mod initializer on the client environment.
+     */
     @Override
     public void onInitializeClient() {
-        config = Config.load(configPath());
-        config.save(configPath());
-
-        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
-            @Override
-            public Identifier getFabricId() {
-                return Identifier.of(MODID, "shader-injector");
-            }
-
-            @Override
-            public void reload(ResourceManager manager) {
-                config.setFontSmoothingUniform();
-            }
-        });
-    }
-
-    public static Path configPath() {
-        return FabricLoader.getInstance().getConfigDir().resolve(MODID + ".json");
+        // Unused
     }
 }
