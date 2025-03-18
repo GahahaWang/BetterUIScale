@@ -21,8 +21,7 @@
 
   "environment": "*",
   "entrypoints": {
-    "client": [ "net.rosemods.betteruiscale.Main" ],
-    "modmenu": [ "net.rosemods.betteruiscale.ModMenuIntegration" ]
+    "client": [ "net.rosemods.betteruiscale.Main" ]
   },
   "mixins": [
     "betteruiscale.mixins.json"
@@ -31,7 +30,7 @@
 
   "depends": {
     "fabricloader": ">=0.11.11",
-    "minecraft": "~1.21",
+    "minecraft": "~1.21.4",
     "java": ">=21",
     "fabric": "*"
   },
