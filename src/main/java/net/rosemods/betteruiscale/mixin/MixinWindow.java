@@ -15,7 +15,7 @@ public class MixinWindow {
     private int framebufferHeight;
 
     @Shadow
-    private double scaleFactor;
+    private int scaleFactor;
 
     @Shadow
     private int scaledWidth;
@@ -40,9 +40,10 @@ public class MixinWindow {
      * @reason Modifies gui scaling
      */
     @Overwrite
-    public void setScaleFactor(double internalScaleFactor) {
+    public void setScaleFactor(int internalScaleFactor) {
         this.scaleFactor = ScaleFactorUtil.fromInternalScaleFactor(internalScaleFactor);
         scaledWidth = ScaleFactorUtil.scaleInternal(framebufferWidth, internalScaleFactor);
         scaledHeight = ScaleFactorUtil.scaleInternal(framebufferHeight, internalScaleFactor);
     }
+
 }
